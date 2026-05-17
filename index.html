@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE DIAGNOSIS // ONLINE</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .terminal {
+            width: 600px;
+            background-color: #1a1a1a;
+            border: 2px solid #00ff66;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .screen { display: none; }
+        .screen.active { display: block; }
+        h1, h2 { text-align: center; text-transform: uppercase; margin-top: 0; }
+        input, select, button {
+            width: 100%;
+            background: #000;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        button { cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        button:hover { background: #00ff66; color: #000; }
+        .setup-group { margin-bottom: 15px; }
+        .setup-group label { display: block; margin-bottom: 5px; font-size: 14px; }
+        
+        #chat-box {
+            height: 220px;
+            border: 1px solid #00ff66;
+            background: #000;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .msg { margin-bottom: 8px; line-height: 1.4; }
+        .msg.doc { color: #ff3333; }
+        .msg.pat { color: #3399ff; }
+        
+        #player-list { margin: 10px 0; padding-left: 20px; }
+        #role-card {
+            background: #262626;
+            padding: 10px;
+            border-left: 4px solid #00ff66;
+            margin-bottom: 15px;
+        }
+        #questions-counter {
+            text-align: center;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        #final-decision-zone {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #00ff66;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal">
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+    <div id="screen-auth" class="screen active">
+        <h1>The Diagnosis</h1>
+        <input type="text" id="player-name" placeholder="ВВЕДИТЕ ИМЯ ИГРОКА..." maxlength="15">
+        
+        <div class="setup-group">
+            <label for="question-limit">> ВЫБЕРИТЕ ЛИМИТ ВОПРОСОВ ДОКТОРА:</label>
+            <select id="question-limit">
+                <option value="1">1 ВОПРОС (БЛИЦ)</option>
+                <option value="5" selected>5 ВОПРОСОВ</option>
+                <option value="10">10 ВОПРОСОВ</option>
+                <option value="20">20 ВОПРОСОВ</option>
+                <option value="50">50 ВОПРОСОВ</option>
+            </select>
+        </div>
+        
+        <button onclick="createRoom()">[ СГЕНЕРИРОВАТЬ КАБИНЕТ ]</button>
+        <hr style="border-color: #00ff66; margin: 20px 0;">
+        <input type="text" id="room-code-input" placeholder="КОД КАБИНЕТА (4 БУКВЫ)..." maxlength="4">
+        <button onclick="joinRoom()">[ ВОЙТИ В КАБИНЕТ ]</button>
+    </div>
+
+    <!-- ЭКРАН 2: ЛОББИ -->
+    <div id="screen-lobby" class="screen">
+        <h2>Кабинет: <span id="lobby-code" style="color:#fff">----</span></h2>
+        <p>> ИГРОКИ В ОЧЕРЕДИ НА ПРИЕМ:</p>
+        <ul id="player-list"></ul>
+        <button id="start-game-btn" style="display:none;" onclick="startGame()">[ НАЧАТЬ ПРИЕМ ]</button>
+        <p id="wait-host-text" style="text-align:center; color:#888;">Ожидание, пока Доктор начнет сеанс...</p>
+    </div>
+
+    <!-- ЭКРАН 3: СЕССИЯ -->
+    <div id="screen-game" class="screen">
+        <div id="questions-counter">ОСТАЛОСЬ ВОПРОСОВ: --</div>
+        <div id="role-card">Определяем вашу роль устройством...</div>
+        
+        <div id="chat-box"></div>
+        
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="chat-input" placeholder="Введите реплику (если играете текстом)..." onkeydown="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()" style="width: 120px; margin: 0;">ОТПРАВИТЬ</button>
+        </div>
+
+        <!-- ЗОНА ДЛЯ ДОСРОЧНОГО ФИНАЛА (ДЛЯ ДОКТОРА) -->
+        <div id="final-decision-zone">
+            <label style="color: #ff3333; display:block; margin-bottom:5px;">> ЗАКЛЮЧЕНИЕ ЭКСПЕРТИЗЫ (ДОСРОЧНЫЙ ВЫБОР):</label>
+            <select id="diagnosis-selector"></select>
+            <button onclick="submitFinalDiagnosis()" style="background: #330000; color: #ff3333; border-color: #ff3333; margin-top: 5px;">[ ПОСТАВИТЬ ДИАГНОЗ ]</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const AMVERA_URL = 'wss://the-diagnosis-fidelity.amvera.io';
+    let ws;
+    let myName = "";
+    let isHost = false;
+
+    function initWebSocket(onOpenCallback) {
+        ws = new WebSocket(AMVERA_URL);
+
+        ws.onopen = () => {
+            console.log("Успешный линк с Амверой");
+            onOpenCallback();
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            switch(data.type) {
+                case 'ROOM_CREATED':
+                    showScreen('screen-lobby');
+                    document.getElementById('lobby-code').innerText = data.code;
+                    break;
+
+                case 'ROOM_JOINED':
+                    showScreen('screen-lobby');
+                    document.getElementById('lobby-code').innerText = data.code;
+                    break;
+
+                case 'SET_HOST':
+                    isHost = true;
+                    document.getElementById('start-game-btn').style.display = 'block';
+                    document.getElementById('wait-host-text').style.display = 'none';
+                    break;
+
+                case 'UPDATE_PLAYERS':
+                    const listHtml = data.players.map(p => `<li>${p.name} ${p.isHost ? '(Доктор)' : '(Пациент)'}</li>`).join('');
+                    document.getElementById('player-list').innerHTML = listHtml;
+                    break;
+
+                case 'GAME_STARTED':
+                    showScreen('screen-game');
+                    const roleCard = document.getElementById('role-card');
+                    
+                    if (data.role === 'doctor') {
+                        roleCard.innerHTML = `<span style="color:#ff3333; font-weight:bold;">ВЫ — ДОКТОР.</span> Задавайте вопросы (в чате или голосом в Discord). Вы можете завершить сеанс кнопкой ниже в любой момент!`;
+                        document.getElementById('final-decision-zone').style.display = 'block';
+                        
+                        const selector = document.getElementById('diagnosis-selector');
+                        selector.innerHTML = data.diagnosesList.map(d => `<option value="${d}">${d}</option>`).join('');
+                    } else {
+                        roleCard.innerHTML = `<span style="color:#3399ff; font-weight:bold;">ВЫ — ПАЦИЕНТ.</span><br>Ваш диагноз: <span style="color:#fff; font-weight:bold;">"${data.diagnosis}"</span>.<br>Отвечайте Доктору, отыгрывая симптомы.`;
+                        document.getElementById('final-decision-zone').style.display = 'none';
+                    }
+                    break;
+
+                case 'UPDATE_QUESTIONS':
+                    document.getElementById('questions-counter').innerText = `ОСТАЛОСЬ ОФИЦИАЛЬНЫХ ВОПРОСОВ: ${data.left}`;
+                    break;
+
+                case 'CHAT_MSG':
+                    const chatBox = document.getElementById('chat-box');
+                    const cls = data.isDoctor ? 'doc' : 'pat';
+                    chatBox.innerHTML += `<div class="msg ${cls}"><strong>${data.sender}:</strong> ${data.text}</div>`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                    break;
+
+                case 'GAME_OVER':
+                    alert(`СЕАНС ОКОНЧЕН!\n\n${data.reason}\n\nРеальный диагноз: ${data.diagnosis}`);
+                    location.reload();
+                    break;
+
+                case 'ERROR':
+                    alert(data.message);
+                    break;
+            }
+        };
+
+        ws.onclose = () => {
+            console.log("Линк разорван");
+        };
+    }
+
+    function createRoom() {
+        const nameInput = document.getElementById('player-name');
+        myName = nameInput.value.trim();
+        if (!myName) return alert('Введите ваше имя!');
+        const limit = parseInt(document.getElementById('question-limit').value);
+
+        initWebSocket(() => {
+            ws.send(JSON.stringify({ type: 'CREATE_ROOM', name: myName, questionLimit: limit }));
+        });
+    }
+
+    function joinRoom() {
+        const nameInput = document.getElementById('player-name');
+        myName = nameInput.value.trim();
+        if (!myName) return alert('Впишите имя!');
+        const codeInput = document.getElementById('room-code-input');
+        const code = codeInput.value.trim().toUpperCase();
+        if (code.length !== 4) return alert('Код содержит 4 латинских символа!');
+
+        initWebSocket(() => {
+            ws.send(JSON.stringify({ type: 'JOIN_ROOM', name: myName, code: code }));
+        });
+    }
+
+    function startGame() {
+        if (ws && ws.readyState === 1) {
+            ws.send(JSON.stringify({ type: 'START_GAME' }));
+        }
+    }
+
+    function sendMsg() {
+        const input = document.getElementById('chat-input');
+        const text = input.value.trim();
+        if (!text) return;
+
+        if (ws && ws.readyState === 1) {
+            ws.send(JSON.stringify({ type: 'SEND_MSG', text: text }));
+            input.value = "";
+        }
+    }
+
+    function submitFinalDiagnosis() {
+        const select = document.getElementById('diagnosis-selector');
+        const chosen = select.value;
+        if (!chosen) return;
+
+        if (confirm(`Вы уверены, что готовы поставить этот диагноз и завершить сеанс?\n\n"${chosen}"`)) {
+            ws.send(JSON.stringify({ type: 'SUBMIT_DIAGNOSIS', diagnosis: chosen }));
+        }
+    }
+
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+</script>
+</body>
+</html>
