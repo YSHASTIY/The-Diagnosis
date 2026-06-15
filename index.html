@@ -664,6 +664,7 @@ let myRoom = null;
 let isHost = false;
 let questionCount = 0;
 let roundDiagnoses = [];
+let sessionDiagnosis = null;   // <-- важно для пациента
 let timerInterval = null;
 let sessionSeconds = 0;
 let patientsList = [];
@@ -746,6 +747,7 @@ function connectWebSocket(callback) {
         if (data.type === 'GAME_STARTED') {
             myRole = data.role;
             roundDiagnoses = data.roundDiagnoses;
+            sessionDiagnosis = data.diagnosis;          // <-- ИСПРАВЛЕНО: сохраняем диагноз пациента
             patientsList = data.players.filter(name => name !== myName);
             startGameUI();
         }
@@ -902,6 +904,8 @@ function startGameUI() {
         document.getElementById('patient-diagnosis').style.display = 'block';
         document.getElementById('doctor-panel').style.display = 'none';
         document.getElementById('end-game-btn').style.display = 'none';
+        // Теперь sessionDiagnosis точно содержит диагноз
+        document.getElementById('diag-text').textContent = sessionDiagnosis || '—';
     }
 }
 
