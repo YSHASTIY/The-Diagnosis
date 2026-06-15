@@ -39,7 +39,6 @@
                 radial-gradient(ellipse 80% 50% at 50% 50%, rgba(30,20,50,0.8) 0%, transparent 100%);
         }
 
-        /* Floating dust particles */
         .particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
         .particle {
             position: absolute;
@@ -54,29 +53,14 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* Room silhouette elements */
         .room-deco {
             position: fixed; z-index: 0; pointer-events: none;
         }
-        .lamp {
-            bottom: 0; left: 5%;
-            width: 180px; height: 280px;
-        }
-        .bookshelf {
-            top: 0; right: 0;
-            width: 140px; height: 100vh;
-        }
-        .plant {
-            bottom: 0; right: 8%;
-            width: 120px; height: 200px;
-        }
-        .window {
-            top: 30px; left: 50%;
-            transform: translateX(-50%);
-            width: 260px; height: 180px;
-        }
+        .lamp { bottom: 0; left: 5%; width: 180px; height: 280px; }
+        .bookshelf { top: 0; right: 0; width: 140px; height: 100vh; }
+        .plant { bottom: 0; right: 8%; width: 120px; height: 200px; }
+        .window { top: 30px; left: 50%; transform: translateX(-50%); width: 260px; height: 180px; }
 
-        /* ─── LAYOUT ─── */
         #app {
             position: relative; z-index: 1;
             min-height: 100vh;
@@ -99,7 +83,6 @@
         .screen { display: none; }
         .screen.active { display: block; }
 
-        /* ─── LOGO ─── */
         .logo {
             text-align: center;
             margin-bottom: 6px;
@@ -125,7 +108,6 @@
             margin-top: 4px;
         }
 
-        /* ─── DIVIDER ─── */
         .divider {
             display: flex; align-items: center; gap: 12px;
             margin: 18px 0;
@@ -136,7 +118,6 @@
         }
         .divider span { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; }
 
-        /* ─── FORM ELEMENTS ─── */
         .form-group { margin-bottom: 16px; }
         label {
             display: block;
@@ -146,7 +127,7 @@
             letter-spacing: 1px;
             margin-bottom: 8px;
         }
-        input[type="text"] {
+        input[type="text"], input[type="number"] {
             width: 100%;
             padding: 13px 16px;
             background: #0f0d17;
@@ -157,14 +138,13 @@
             font-family: 'Inter', sans-serif;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-        input[type="text"]:focus {
+        input:focus {
             outline: none;
             border-color: var(--accent2);
             box-shadow: 0 0 0 3px rgba(168,85,247,0.15);
         }
-        input[type="text"]::placeholder { color: var(--muted); }
+        input::placeholder { color: var(--muted); }
 
-        /* ─── BUTTONS ─── */
         .btn {
             display: block; width: 100%;
             padding: 14px 20px;
@@ -212,7 +192,6 @@
             margin-bottom: 0;
         }
 
-        /* ─── LOBBY ─── */
         .room-code-box {
             background: #0f0d17;
             border: 1px dashed rgba(192,132,252,0.3);
@@ -244,14 +223,7 @@
             from { opacity: 0; transform: translateX(-12px); }
             to   { opacity: 1; transform: translateX(0); }
         }
-        .badge {
-            font-size: 0.65rem; padding: 2px 7px; border-radius: 4px; font-weight: 600;
-            letter-spacing: 0.5px; text-transform: uppercase;
-        }
-        .badge-doctor { background: rgba(239,68,68,0.2); color: #fca5a5; }
-        .badge-patient { background: rgba(192,132,252,0.15); color: var(--accent); }
 
-        /* ─── GAME SCREEN ─── */
         .role-banner {
             text-align: center; padding: 16px; border-radius: 12px;
             margin-bottom: 20px;
@@ -270,7 +242,6 @@
         .role-banner.doctor .role-name { color: #fca5a5; }
         .role-banner.patient .role-name { color: var(--accent); }
 
-        /* Diagnosis for patient */
         .diagnosis-card {
             background: #0f0d17;
             border: 1px solid rgba(192,132,252,0.25);
@@ -284,7 +255,6 @@
             font-style: italic;
         }
 
-        /* Doctor panel: diagnoses list */
         .doctor-panel { margin-bottom: 20px; }
         .doctor-panel .panel-title {
             font-size: 0.72rem; color: var(--muted); letter-spacing: 2px;
@@ -317,12 +287,8 @@
             text-decoration: line-through;
             opacity: 0.6;
         }
-        .diag-card .num {
-            font-size: 0.65rem; color: var(--muted);
-            display: block; margin-bottom: 3px;
-        }
+        .diag-card .num { font-size: 0.65rem; color: var(--muted); display: block; margin-bottom: 3px; }
 
-        /* Question counter */
         .q-counter {
             display: flex; align-items: center; gap: 12px;
             background: rgba(251,191,36,0.08);
@@ -339,7 +305,6 @@
         .q-counter .q-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
         .q-counter .q-sub { font-size: 0.75rem; color: #fde68a; margin-top: 2px; }
 
-        /* Chat */
         .chat-box {
             background: #0c0a14;
             border: 1px solid var(--border);
@@ -404,7 +369,6 @@
         }
         .chat-send:hover { opacity: 0.85; }
 
-        /* Timer bar */
         .timer-bar-wrap {
             height: 3px; background: rgba(255,255,255,0.05);
             border-radius: 2px; margin-bottom: 14px; overflow: hidden;
@@ -416,7 +380,6 @@
             border-radius: 2px;
         }
 
-        /* Round info */
         .round-info {
             display: flex; justify-content: space-between;
             font-size: 0.72rem; color: var(--muted);
@@ -424,81 +387,65 @@
         }
         .round-info span { letter-spacing: 0.5px; }
 
-        /* Results screen */
         .result-card {
             text-align: center; padding: 20px;
         }
         .result-card .trophy { font-size: 3rem; margin-bottom: 10px; }
         .result-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 6px; }
         .result-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
-        .result-diag {
-            background: rgba(192,132,252,0.08);
-            border: 1px solid rgba(192,132,252,0.2);
-            border-radius: 10px; padding: 14px;
-            font-style: italic; font-size: 0.9rem;
-            color: #c4bdd8; margin-bottom: 20px;
-            line-height: 1.5;
+
+        .result-details { margin-bottom: 20px; }
+        .detail-row {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
         }
 
-        /* ─── DECORATIVE SVG elements ─── */
-        svg.deco { display: block; }
-
-        /* Loading spinner */
-        .connecting {
-            text-align: center; padding: 20px;
+        .guess-row {
+            display: flex; align-items: center; gap: 10px;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
         }
-        .spinner {
-            width: 36px; height: 36px;
-            border: 2px solid rgba(192,132,252,0.2);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 12px;
+        .guess-row select {
+            background: #0f0d17;
+            color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            flex: 1;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Pulse animation for waiting */
+        .event-modal {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: #000; padding: 12px 24px;
+            border-radius: 12px; z-index: 200; font-weight: 600;
+            box-shadow: 0 4px 20px rgba(192,132,252,0.5);
+            pointer-events: none;
+        }
+
+        .pulsing { animation: pulse 2s ease-in-out infinite; }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        .pulsing { animation: pulse 2s ease-in-out infinite; }
 
-        /* 3D perspective on card hover */
-        #app { perspective: 1200px; }
-        .card {
-            transition: transform 0.4s ease;
-        }
-
-        /* Countdown overlay */
-        .countdown-overlay {
-            position: fixed; inset: 0; z-index: 100;
-            background: rgba(10,8,18,0.92);
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column;
-        }
-        .countdown-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 8rem; font-weight: 900;
-            color: var(--accent);
-            text-shadow: 0 0 60px rgba(192,132,252,0.6);
-            animation: countPop 0.9s ease;
-        }
-        @keyframes countPop {
-            0%   { transform: scale(1.5); opacity: 0; }
-            30%  { transform: scale(0.95); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .countdown-text { color: var(--muted); font-size: 0.9rem; letter-spacing: 2px; margin-top: 8px; text-transform: uppercase; }
+        svg.deco { display: block; }
     </style>
 </head>
 <body>
-
-<!-- ROOM ATMOSPHERE -->
 <div class="bg-layer"></div>
 <div class="particles" id="particles"></div>
 
-<!-- Lamp SVG -->
+<!-- ROOM DECOR (svg оставлены как есть) -->
 <div class="room-deco lamp">
     <svg viewBox="0 0 180 280" fill="none" xmlns="http://www.w3.org/2000/svg" class="deco">
         <rect x="84" y="120" width="12" height="140" fill="#1a1625" rx="2"/>
@@ -513,19 +460,15 @@
         <ellipse cx="90" cy="125" rx="70" ry="40" fill="url(#lampGlow)"/>
     </svg>
 </div>
-
-<!-- Bookshelf SVG -->
 <div class="room-deco bookshelf">
     <svg viewBox="0 0 140 800" fill="none" xmlns="http://www.w3.org/2000/svg" class="deco" style="opacity:0.4">
         <rect x="0" y="0" width="140" height="800" fill="#100e1a"/>
         <rect x="0" y="0" width="4" height="800" fill="#1e1a30"/>
-        <!-- shelves -->
         <rect x="4" y="100" width="132" height="4" fill="#1e1a30"/>
         <rect x="4" y="220" width="132" height="4" fill="#1e1a30"/>
         <rect x="4" y="340" width="132" height="4" fill="#1e1a30"/>
         <rect x="4" y="460" width="132" height="4" fill="#1e1a30"/>
         <rect x="4" y="580" width="132" height="4" fill="#1e1a30"/>
-        <!-- books row 1 -->
         <rect x="8"  y="60" width="14" height="40" fill="#2a1040" rx="1"/>
         <rect x="24" y="50" width="18" height="50" fill="#1a2040" rx="1"/>
         <rect x="44" y="55" width="12" height="45" fill="#401020" rx="1"/>
@@ -533,7 +476,6 @@
         <rect x="80" y="58" width="14" height="42" fill="#402010" rx="1"/>
         <rect x="96" y="50" width="16" height="50" fill="#2a2040" rx="1"/>
         <rect x="114" y="62" width="14" height="38" fill="#401a30" rx="1"/>
-        <!-- books row 2 -->
         <rect x="8"  y="170" width="16" height="50" fill="#1a3040" rx="1"/>
         <rect x="26" y="160" width="14" height="60" fill="#302010" rx="1"/>
         <rect x="42" y="168" width="20" height="52" fill="#2a0a40" rx="1"/>
@@ -541,10 +483,8 @@
         <rect x="78" y="165" width="18" height="55" fill="#301020" rx="1"/>
         <rect x="98" y="170" width="14" height="50" fill="#1a2a10" rx="1"/>
         <rect x="114" y="162" width="16" height="58" fill="#402020" rx="1"/>
-        <!-- small frames -->
         <rect x="10" y="280" width="40" height="30" fill="#1e1a2a" rx="2" stroke="#2a2040" stroke-width="1"/>
         <rect x="60" y="275" width="30" height="35" fill="#1e1a2a" rx="2" stroke="#2a2040" stroke-width="1"/>
-        <!-- more books -->
         <rect x="8"  y="390" width="18" height="70" fill="#40102a" rx="1"/>
         <rect x="28" y="400" width="14" height="60" fill="#102040" rx="1"/>
         <rect x="44" y="392" width="22" height="68" fill="#203a10" rx="1"/>
@@ -553,8 +493,6 @@
         <rect x="102" y="388" width="20" height="72" fill="#301030" rx="1"/>
     </svg>
 </div>
-
-<!-- Plant SVG -->
 <div class="room-deco plant">
     <svg viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="deco" style="opacity:0.5">
         <rect x="40" y="160" width="40" height="30" fill="#1a1625" rx="4"/>
@@ -568,24 +506,18 @@
         <path d="M60 85 Q60 55 70 25 Q55 40 50 80" fill="#153008"/>
     </svg>
 </div>
-
-<!-- Window SVG -->
 <div class="room-deco window">
     <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="deco" style="opacity:0.3">
         <rect x="2" y="2" width="256" height="176" fill="#0d0b1a" rx="4" stroke="#2a2040" stroke-width="4"/>
         <rect x="6" y="6" width="248" height="168" fill="#080614" rx="2"/>
-        <!-- window light streaks -->
         <rect x="10" y="10" width="4" height="158" fill="#1a1430" rx="2" opacity="0.5"/>
-        <!-- moon glow through window -->
         <radialGradient id="moonGlow" cx="70%" cy="30%" r="40%">
             <stop offset="0%" stop-color="#c084fc" stop-opacity="0.15"/>
             <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>
         </radialGradient>
         <rect x="6" y="6" width="248" height="168" fill="url(#moonGlow)" rx="2"/>
-        <!-- window cross -->
         <rect x="4" y="88" width="252" height="4" fill="#2a2040"/>
         <rect x="126" y="4" width="4" height="172" fill="#2a2040"/>
-        <!-- curtains -->
         <path d="M4 6 Q20 90 10 174" stroke="#1a1428" stroke-width="16" fill="none"/>
         <path d="M256 6 Q240 90 250 174" stroke="#1a1428" stroke-width="16" fill="none"/>
     </svg>
@@ -593,25 +525,20 @@
 
 <div id="app">
     <div class="card" id="main-card">
-
-        <!-- LOGO -->
         <div class="logo">
             <h1>MIND<span class="hl">FAKE</span>D</h1>
             <p class="tagline">Психологическая пати-игра • Кабинет доктора</p>
         </div>
 
-        <!-- ══════════ SCREEN 1: AUTH ══════════ -->
+        <!-- SCREEN: AUTH -->
         <div id="screen-auth" class="screen active">
             <div style="height:20px"></div>
             <div class="form-group">
                 <label>Ваше имя в палате</label>
                 <input type="text" id="username" placeholder="Пациент #1" autocomplete="off" maxlength="20">
             </div>
-
             <button class="btn btn-primary" onclick="createRoom()">⚕ Открыть кабинет</button>
-
             <div class="divider"><span>или войти в чужой</span></div>
-
             <div class="form-group">
                 <label>Код комнаты</label>
                 <input type="text" id="room-code" placeholder="ABCD" autocomplete="off" maxlength="4"
@@ -620,31 +547,28 @@
             <button class="btn btn-secondary" onclick="joinRoom()">🚪 Войти по коду</button>
         </div>
 
-        <!-- ══════════ SCREEN 2: LOBBY ══════════ -->
+        <!-- SCREEN: LOBBY -->
         <div id="screen-lobby" class="screen">
             <div class="room-code-box">
                 <div class="label">Код комнаты — скинь друзьям</div>
                 <div class="code" id="display-room-code">----</div>
                 <div class="hint">Поделитесь кодом в дискорде / чате</div>
             </div>
-
             <label>Очередь на приём:</label>
             <ul class="player-list" id="players-container"></ul>
+            <div class="pulsing" style="font-size:0.78rem; color:var(--muted); text-align:center; margin-bottom:16px;" id="lobby-waiting-text">Ожидание игроков...</div>
 
-            <div class="pulsing" style="font-size:0.78rem; color:var(--muted); text-align:center; margin-bottom:16px;" id="lobby-waiting-text">
-                Ожидание игроков...
+            <div class="form-group" id="max-questions-group" style="display:none;">
+                <label>Максимум вопросов</label>
+                <input type="number" id="max-questions" value="20" min="5" max="50" step="1">
             </div>
 
-            <button class="btn btn-primary" id="start-game-btn" style="display:none;" onclick="sendStartGame()">
-                🏥 Начать приём
-            </button>
+            <button class="btn btn-primary" id="start-game-btn" style="display:none;" onclick="sendStartGame()">🏥 Начать приём</button>
             <button class="btn btn-danger" onclick="leaveRoom()">Выйти в меню</button>
         </div>
 
-        <!-- ══════════ SCREEN 3: GAME ══════════ -->
+        <!-- SCREEN: GAME -->
         <div id="screen-game" class="screen">
-
-            <!-- Role banner -->
             <div class="role-banner" id="role-banner">
                 <div class="role-icon" id="role-icon">👤</div>
                 <div class="role-title" id="role-title">Ваша роль</div>
@@ -657,7 +581,7 @@
                 <div class="text" id="diag-text">—</div>
             </div>
 
-            <!-- DOCTOR: question counter + diagnoses list -->
+            <!-- DOCTOR: question counter + guesses -->
             <div id="doctor-panel" style="display:none;">
                 <div class="q-counter">
                     <div class="q-num" id="q-count">0</div>
@@ -667,24 +591,18 @@
                     </div>
                     <button class="btn btn-gold btn-sm" onclick="incrementQuestion()">+1 Вопрос</button>
                 </div>
-
-                <div class="doctor-panel">
-                    <div class="panel-title">
-                        <span>🗂 Диагнозы этой сессии</span>
-                        <span style="color:var(--accent); font-size:0.8rem;" id="guessed-count">0 / 10</span>
-                    </div>
-                    <div class="diagnoses-grid" id="diagnoses-grid"></div>
+                <div id="doctor-guesses" style="margin-bottom:20px;">
+                    <div class="panel-title">🩺 Ваши предположения</div>
+                    <div id="guesses-list"></div>
                 </div>
             </div>
 
-            <!-- Timer bar -->
             <div class="timer-bar-wrap"><div class="timer-bar" id="timer-bar"></div></div>
             <div class="round-info">
                 <span id="round-label">Сессия идёт</span>
                 <span id="timer-label">⏱ —</span>
             </div>
 
-            <!-- Chat -->
             <div class="chat-box">
                 <div class="chat-messages" id="chat-messages">
                     <div class="msg-system">Добро пожаловать в кабинет доктора 🏥</div>
@@ -695,49 +613,38 @@
                 </div>
             </div>
 
-            <button class="btn btn-danger" id="end-game-btn" style="display:none;" onclick="endGame()">
-                ✓ Завершить приём
-            </button>
+            <button class="btn btn-danger" id="end-game-btn" style="display:none;" onclick="endGame()">✓ Завершить приём</button>
             <button class="btn btn-secondary" onclick="leaveRoom()">← В меню</button>
         </div>
 
-        <!-- ══════════ SCREEN 4: RESULTS ══════════ -->
+        <!-- SCREEN: RESULTS -->
         <div id="screen-results" class="screen">
             <div class="result-card">
-                <div class="trophy">🏆</div>
-                <h3>Сессия завершена</h3>
-                <p>Доктор задал <strong id="final-q-count" style="color:var(--gold)">0</strong> вопросов</p>
+                <div class="trophy" id="result-icon">🏆</div>
+                <h3 id="result-title">Сессия завершена</h3>
+                <p id="result-summary"></p>
             </div>
-            <div class="result-diag">
-                <div style="font-size:0.7rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">Диагноз сессии был:</div>
-                <div id="result-diag-text">—</div>
-            </div>
+            <div class="result-details" id="result-details"></div>
             <button class="btn btn-primary" onclick="playAgain()">🔄 Новая сессия</button>
             <button class="btn btn-secondary" onclick="leaveRoom()">← Главное меню</button>
         </div>
-
     </div>
 </div>
 
 <script>
-// ─── PARTICLES ───────────────────────────────────────
+// particles
 (function() {
     const c = document.getElementById('particles');
     for (let i = 0; i < 18; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
         const size = Math.random() * 4 + 2;
-        p.style.cssText = `
-            width:${size}px; height:${size}px;
-            left:${Math.random()*100}%;
-            animation-duration:${8 + Math.random()*12}s;
-            animation-delay:${Math.random()*8}s;
-        `;
+        p.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; animation-duration:${8 + Math.random()*12}s; animation-delay:${Math.random()*8}s;`;
         c.appendChild(p);
     }
 })();
 
-// ─── 3D CARD TILT ─────────────────────────────────────
+// 3D tilt
 const card = document.getElementById('main-card');
 document.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -747,135 +654,25 @@ document.addEventListener('mousemove', (e) => {
     const dy = (e.clientY - cy) / (window.innerHeight / 2);
     card.style.transform = `rotateY(${dx * 3}deg) rotateX(${-dy * 2.5}deg)`;
 });
-document.addEventListener('mouseleave', () => {
-    card.style.transform = 'rotateY(0) rotateX(0)';
-});
+document.addEventListener('mouseleave', () => { card.style.transform = 'rotateY(0) rotateX(0)'; });
 
-// ─── 100 DIAGNOSES ────────────────────────────────────
-const ALL_DIAGNOSES = [
-    "Вы уверены, что вы — коты (мяукаете, хотите спать, боитесь воды).",
-    "Вы думаете, что сейчас 1400-й год (средневековье, магия, инквизиция).",
-    "Вы панически боитесь буквы «О» (пытаетесь заменять её в словах).",
-    "Вы обязаны во всём соглашаться с предыдущим игроком.",
-    "Вы думаете, что вы — секретные агенты, а Доктор — шпион.",
-    "Вы разговариваете исключительно как пафосный рэпер из 2000-х.",
-    "Вы считаете, что Доктор — это ваш маленький капризный ребёнок.",
-    "Вы уверены, что находитесь на тонущем Титанике.",
-    "Вы убеждены, что все вокруг — роботы, а вы — единственный человек.",
-    "Вы говорите только в форме вопроса (даже если хотите утверждать).",
-    "Вы думаете, что вы — известный шеф-повар и оцениваете всё как блюдо.",
-    "Вы верите, что вы невидимы и никто вас не слышит.",
-    "Вы уверены, что живёте в симуляции и пытаетесь найти баг в матрице.",
-    "Вы думаете, что вы — пират XVII века, ищущий сокровища.",
-    "Вы убеждены, что обладаете даром телепатии и «читаете» мысли.",
-    "Вы ведёте себя как строгий судья на каждое высказывание (возражение!).",
-    "Вы считаете, что все вокруг хотят вам продать что-то, и отказываетесь.",
-    "Вы думаете, что вы — метеоролог и комментируете воображаемую погоду.",
-    "Вы уверены, что это розыгрыш скрытой камерой и ищете её.",
-    "Вы говорите только цитатами из фильмов (реальных или выдуманных).",
-    "Вы считаете, что умеете летать, но «не хотите показывать это людям».",
-    "Вы думаете, что вы — инопланетянин, изучающий земные обычаи.",
-    "Вы убеждены, что у вас аллергия на конкретное слово (на выбор ведущего).",
-    "Вы думаете, что вы — Наполеон Бонапарт перед важной битвой.",
-    "Вы уверены, что разговариваете на языке шифров, хотя говорите нормально.",
-    "Вы считаете, что каждое слово собеседника имеет скрытый смысл.",
-    "Вы думаете, что вы — детектив и расследуете дело прямо сейчас.",
-    "Вы уверены, что являетесь королём/королевой и требуете соответствующего обращения.",
-    "Вы думаете, что вы — компьютерная программа с ограниченным словарём.",
-    "Вы убеждены, что только вы знаете рецепт лучшего борща в мире.",
-    "Вы уверены, что время идёт в обратную сторону, и удивляетесь этому.",
-    "Вы думаете, что вы — известный блогер и всё снимаете на «камеру».",
-    "Вы убеждены, что несёте секретную миссию по спасению мира.",
-    "Вы считаете, что вы — тренер мирового уровня по чему-то абсурдному.",
-    "Вы думаете, что вы — призрак и очень удивляетесь, что вас видят.",
-    "Вы уверены, что разговор ведётся на переговорах о ядерном разоружении.",
-    "Вы думаете, что каждый человек — ваш дальний родственник.",
-    "Вы убеждены, что вы — экскурсовод в необычном музее.",
-    "Вы уверены, что находитесь на собеседовании в NASA.",
-    "Вы думаете, что вы — вулкан, который вот-вот проснётся.",
-    "Вы убеждены, что вы — переводчик с языка животных.",
-    "Вы уверены, что за каждой дверью скрывается другое измерение.",
-    "Вы думаете, что вы — нобелевский лауреат мира и ведёте переговоры.",
-    "Вы убеждены, что разговариваете с людьми из будущего.",
-    "Вы уверены, что ваша тень живёт отдельной жизнью.",
-    "Вы думаете, что вы — курьер, доставляющий важный пакет.",
-    "Вы убеждены, что каждый предмет в комнате хочет с вами подружиться.",
-    "Вы уверены, что вы — великий маг, который потерял волшебную палочку.",
-    "Вы думаете, что вы — ребёнок 5 лет, которому всё интересно.",
-    "Вы убеждены, что живёте в реалити-шоу «Последний герой».",
-    "Вы уверены, что знаете дату конца света (и это очень скоро).",
-    "Вы думаете, что вы — барды-менестрели и всё говорите в рифму.",
-    "Вы убеждены, что вы — профессиональный дегустатор воздуха.",
-    "Вы уверены, что вы — персонаж из компьютерной игры с полосой здоровья.",
-    "Вы думаете, что умеете управлять погодой силой мысли.",
-    "Вы убеждены, что сделаны из стекла и боитесь сломаться.",
-    "Вы уверены, что вы — смотритель маяка на необитаемом острове.",
-    "Вы думаете, что вы — оракул и знаете ответы на все вопросы (но говорите загадками).",
-    "Вы убеждены, что вы — тайный двойник известной знаменитости.",
-    "Вы уверены, что разговариваете с планетой Земля напрямую.",
-    "Вы думаете, что вы — аудитор МВФ с особыми полномочиями.",
-    "Вы убеждены, что можете слышать мысли растений.",
-    "Вы уверены, что вы — последний хранитель рецепта Кока-Колы.",
-    "Вы думаете, что вы — профессиональный притворщик, который притворяется нормальным.",
-    "Вы убеждены, что вы — единственный, кто замечает, что небо на самом деле зелёное.",
-    "Вы уверены, что вы — русалка, которой временно дали ноги.",
-    "Вы думаете, что вы — персонаж Диккенса и живёте в викторианской Англии.",
-    "Вы убеждены, что каждый разговор — это экзамен, который можно провалить.",
-    "Вы уверены, что вы — навигатор корабля в эпоху великих открытий.",
-    "Вы думаете, что вы — последний дракон, притворяющийся человеком.",
-    "Вы убеждены, что умеете останавливать время, но «сейчас не хотите».",
-    "Вы уверены, что вы — шпион под глубоким прикрытием, и Доктор — ваш куратор.",
-    "Вы думаете, что вы — тренер олимпийской сборной по настольному теннису.",
-    "Вы убеждены, что у вас есть невидимый друг, который даёт вам советы.",
-    "Вы уверены, что вы — потомок египетских фараонов.",
-    "Вы думаете, что вы — эксперт по НЛО и видели их вчера.",
-    "Вы убеждены, что разговор происходит под водой.",
-    "Вы уверены, что ведёте переговоры о покупке Луны.",
-    "Вы думаете, что вы — единственный выживший в апокалипсисе среди роботов.",
-    "Вы убеждены, что у вас суперсила — замедлять время нажатием пальца.",
-    "Вы уверены, что вы — дух старого замка, которому надоело пугать людей.",
-    "Вы думаете, что вы — главный герой аниме и всё происходящее — спойлер.",
-    "Вы убеждены, что живёте в мюзикле и должны петь каждый ответ.",
-    "Вы уверены, что у вас есть хвост (просто не всем видно).",
-    "Вы думаете, что вы — испытатель новой виртуальной реальности.",
-    "Вы убеждены, что вы — страховой агент и всем предлагаете страховку.",
-    "Вы уверены, что вы — заколдованный принц/принцесса, ищущие снятия чар.",
-    "Вы думаете, что вы — профессиональный критик всего на свете.",
-    "Вы убеждены, что находитесь на ярмарке средневековья.",
-    "Вы уверены, что вы — робот, который только что прошёл тест Тьюринга.",
-    "Вы думаете, что за каждой стеной — пропасть, и надо ходить осторожно.",
-    "Вы убеждены, что вы — дипломат из страны, которой не существует.",
-    "Вы уверены, что вы — официант в ресторане с блюдами-концепциями.",
-    "Вы думаете, что вы — советник при дворе безумного короля.",
-    "Вы убеждены, что вы — библиотекарь, знающий все книги наизусть.",
-    "Вы уверены, что вы — полярный исследователь, заблудившийся в Антарктиде.",
-    "Вы думаете, что вы — джинн, случайно выпущенный из бутылки.",
-    "Вы убеждены, что вы — хранитель городской легенды.",
-    "Вы уверены, что вы — звезда немого кино 1920-х годов.",
-    "Вы думаете, что вы — последний рыцарь круглого стола.",
-    "Вы убеждены, что у вас есть карта к невероятному сокровищу.",
-];
-
-// ─── STATE ────────────────────────────────────────────
+// ─── STATE ────────────────────────────────────────
 let ws;
 let myRole = null;
 let myName = null;
 let myRoom = null;
 let isHost = false;
 let questionCount = 0;
-let sessionDiagnosis = null;
 let roundDiagnoses = [];
-let guessedDiagnoses = new Set();
 let timerInterval = null;
 let sessionSeconds = 0;
+let patientsList = [];
 
-const SERVER_URL =
-    window.location.hostname === 'localhost' ||
-    window.location.hostname === '127.0.0.1'
-        ? 'ws://localhost:3000'
-        : 'wss://the-diagnosis-fidelity.amvera.io';
+const SERVER_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'ws://localhost:3000'
+    : 'wss://the-diagnosis-fidelity.amvera.io';
 
-// ─── UTILS ────────────────────────────────────────────
+// ─── UTILS ────────────────────────────────────────
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -899,16 +696,6 @@ function addSystemMsg(text) {
     box.scrollTop = box.scrollHeight;
 }
 
-function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
-
-// ─── TIMER ────────────────────────────────────────────
 function startTimer() {
     sessionSeconds = 0;
     const bar = document.getElementById('timer-bar');
@@ -923,126 +710,139 @@ function startTimer() {
     }, 1000);
 }
 
-function stopTimer() {
-    clearInterval(timerInterval);
-}
+function stopTimer() { clearInterval(timerInterval); }
 
-// ─── WEBSOCKET ────────────────────────────────────────
+// ─── WEBSOCKET ────────────────────────────────────
 function connectWebSocket(callback) {
     if (ws && ws.readyState === WebSocket.OPEN) return callback();
     ws = new WebSocket(SERVER_URL);
-
-    ws.onopen = () => { callback(); };
-
+    ws.onopen = () => callback();
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
-
         if (data.type === 'ROOM_CREATED' || data.type === 'ROOM_JOINED') {
             document.getElementById('display-room-code').textContent = data.code;
             myRoom = data.code;
             showScreen('screen-lobby');
         }
-
         if (data.type === 'UPDATE_PLAYERS') {
             const container = document.getElementById('players-container');
             container.innerHTML = '';
             data.players.forEach(p => {
                 const li = document.createElement('li');
                 li.className = 'player-item';
-                const badge = p.isHost
-                    ? '<span class="badge badge-doctor">Доктор</span>'
-                    : '<span class="badge badge-patient">Пациент</span>';
-                li.innerHTML = `<span>${p.name}</span>${badge}`;
+                li.textContent = p.name;
                 container.appendChild(li);
             });
             const count = data.players.length;
             document.getElementById('lobby-waiting-text').textContent =
                 count === 1 ? 'Ожидание других игроков...' : `${count} игрок(а) в кабинете`;
         }
-
         if (data.type === 'SET_HOST') {
             isHost = true;
             document.getElementById('start-game-btn').style.display = 'block';
-            document.getElementById('lobby-waiting-text').textContent = 'Вы Доктор — начните сессию!';
+            document.getElementById('max-questions-group').style.display = 'block';
+            document.getElementById('lobby-waiting-text').textContent = 'Вы Доктор — настройте лимит и начните сессию!';
         }
-
         if (data.type === 'GAME_STARTED') {
             myRole = data.role;
-            sessionDiagnosis = data.diagnosis;
-            roundDiagnoses = data.roundDiagnoses || [];
+            roundDiagnoses = data.roundDiagnoses;
+            patientsList = data.players.filter(name => name !== myName);
             startGameUI();
         }
-
         if (data.type === 'CHAT_MSG') {
             addMsg(data.sender, data.text, data.isDoctor);
         }
-
         if (data.type === 'GAME_ENDED') {
             stopTimer();
-            document.getElementById('final-q-count').textContent = data.questionCount;
-            document.getElementById('result-diag-text').textContent = data.diagnosis;
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const summary = document.getElementById('result-summary');
+            const detailsDiv = document.getElementById('result-details');
+            if (data.doctorWon) {
+                icon.textContent = '🏆';
+                title.textContent = 'Доктор победил!';
+                summary.textContent = `Угаданы все пациенты за ${data.questionCount} вопросов.`;
+            } else {
+                icon.textContent = '😷';
+                title.textContent = 'Пациенты выиграли!';
+                summary.textContent = data.reason === 'LIMIT_EXCEEDED'
+                    ? `Лимит вопросов (${data.maxQuestions}) исчерпан.`
+                    : 'Доктор не угадал всех пациентов.';
+            }
+            detailsDiv.innerHTML = data.results.map(r => `
+                <div class="detail-row">
+                    <strong>${r.patient}</strong>: 
+                    диагноз «${r.diagnosis}»
+                    ${r.guess ? ` → предположение «${r.guess}»` : ''}
+                    <span style="color:${r.correct ? 'var(--green)' : 'var(--red)'}">
+                        ${r.correct ? '✅' : '❌'}
+                    </span>
+                </div>
+            `).join('');
             showScreen('screen-results');
         }
-
         if (data.type === 'ERROR') {
             alert(data.message);
         }
+        if (data.type === 'EVENT') {
+            showEventModal(data.event, data.message);
+        }
+        if (data.type === 'HINT') {
+            addSystemMsg(`💡 Подсказка: диагноз пациента ${data.patient} начинается на «${data.letter}»`);
+        }
+        if (data.type === 'DIAGNOSIS_CHANGED') {
+            if (myRole === 'patient') {
+                document.getElementById('diag-text').textContent = data.diagnosis;
+                addSystemMsg('🔄 Ваш диагноз изменился из-за события!');
+            }
+        }
     };
-
     ws.onclose = () => {
         stopTimer();
         showScreen('screen-auth');
     };
 }
 
-// ─── ACTIONS ──────────────────────────────────────────
+// ─── ACTIONS ──────────────────────────────────────
 function createRoom() {
     const name = document.getElementById('username').value.trim();
     if (!name) return alert('Введите имя!');
     myName = name;
     isHost = true;
-    connectWebSocket(() => {
-        ws.send(JSON.stringify({ type: 'CREATE_ROOM', name }));
-    });
+    connectWebSocket(() => ws.send(JSON.stringify({ type: 'CREATE_ROOM', name })));
 }
-
 function joinRoom() {
     const name = document.getElementById('username').value.trim();
     const code = document.getElementById('room-code').value.trim().toUpperCase();
     if (!name || !code) return alert('Заполните имя и код комнаты!');
     myName = name;
     isHost = false;
-    connectWebSocket(() => {
-        ws.send(JSON.stringify({ type: 'JOIN_ROOM', name, code }));
-    });
+    connectWebSocket(() => ws.send(JSON.stringify({ type: 'JOIN_ROOM', name, code })));
 }
-
 function sendStartGame() {
-    ws.send(JSON.stringify({ type: 'START_GAME' }));
+    const maxQ = parseInt(document.getElementById('max-questions').value) || 20;
+    ws.send(JSON.stringify({ type: 'START_GAME', maxQuestions: maxQ }));
 }
-
 function leaveRoom() {
     stopTimer();
     if (ws) ws.close();
     myRole = null; myName = null; myRoom = null; isHost = false;
-    questionCount = 0; roundDiagnoses = []; guessedDiagnoses.clear();
+    questionCount = 0; roundDiagnoses = []; patientsList = [];
     document.getElementById('players-container').innerHTML = '';
     document.getElementById('start-game-btn').style.display = 'none';
+    document.getElementById('max-questions-group').style.display = 'none';
     document.getElementById('chat-messages').innerHTML = '<div class="msg-system">Добро пожаловать в кабинет доктора 🏥</div>';
     showScreen('screen-auth');
 }
-
 function playAgain() {
     if (ws && ws.readyState === WebSocket.OPEN) {
-        questionCount = 0; roundDiagnoses = []; guessedDiagnoses.clear();
+        questionCount = 0; roundDiagnoses = []; patientsList = [];
         document.getElementById('chat-messages').innerHTML = '<div class="msg-system">Новая сессия — удачи! 🏥</div>';
         showScreen('screen-lobby');
     } else {
         leaveRoom();
     }
 }
-
 function sendChatMsg() {
     const input = document.getElementById('chat-input');
     const text = input.value.trim();
@@ -1050,17 +850,35 @@ function sendChatMsg() {
     ws.send(JSON.stringify({ type: 'SEND_MSG', text }));
     input.value = '';
 }
-
 document.getElementById('chat-input')?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendChatMsg();
 });
 
-// ─── GAME UI ──────────────────────────────────────────
+function incrementQuestion() {
+    questionCount++;
+    document.getElementById('q-count').textContent = questionCount;
+    const subs = ['Нажмите кнопку после каждого вопроса','Хороший вопрос!','Так держать!','Давите на пациента 😈','Ещё немного...','Вы настоящий доктор!','Пациент нервничает 👀','Диагноз близко!','Отличная работа!','Ещё один вопрос!'];
+    document.getElementById('q-sub').textContent = subs[Math.min(questionCount, subs.length-1)];
+    ws.send(JSON.stringify({ type: 'QUESTION_ASKED', count: questionCount }));
+}
+function endGame() {
+    ws.send(JSON.stringify({ type: 'END_GAME' }));
+}
+function showEventModal(event, message) {
+    const modal = document.createElement('div');
+    modal.className = 'event-modal';
+    modal.textContent = message;
+    document.body.appendChild(modal);
+    setTimeout(() => modal.remove(), 4000);
+}
+
+// ─── GAME UI ──────────────────────────────────────
 function startGameUI() {
     showScreen('screen-game');
     startTimer();
     questionCount = 0;
-    guessedDiagnoses.clear();
+    document.getElementById('q-count').textContent = '0';
+    document.getElementById('q-sub').textContent = 'Нажмите кнопку после каждого вопроса';
 
     const banner = document.getElementById('role-banner');
     const icon   = document.getElementById('role-icon');
@@ -1072,73 +890,57 @@ function startGameUI() {
         icon.textContent = '👨‍⚕️';
         title.textContent = 'Ваша роль';
         name.textContent = 'Доктор';
-
         document.getElementById('patient-diagnosis').style.display = 'none';
         document.getElementById('doctor-panel').style.display = 'block';
         document.getElementById('end-game-btn').style.display = 'block';
-
-        renderDiagnosesGrid();
+        renderGuessesList();
     } else {
         banner.className = 'role-banner patient';
         icon.textContent = '🤕';
         title.textContent = 'Ваша роль';
         name.textContent = 'Пациент';
-
         document.getElementById('patient-diagnosis').style.display = 'block';
         document.getElementById('doctor-panel').style.display = 'none';
         document.getElementById('end-game-btn').style.display = 'none';
-        document.getElementById('diag-text').textContent = sessionDiagnosis || '—';
     }
 }
 
-function renderDiagnosesGrid() {
-    const grid = document.getElementById('diagnoses-grid');
-    grid.innerHTML = '';
-    roundDiagnoses.forEach((d, i) => {
-        const div = document.createElement('div');
-        div.className = `diag-card${guessedDiagnoses.has(i) ? ' guessed' : ''}`;
-        div.id = `diag-${i}`;
-        div.innerHTML = `<span class="num">#${i+1}</span>${d}`;
-        div.onclick = () => toggleGuessed(i);
-        grid.appendChild(div);
+function renderGuessesList() {
+    const list = document.getElementById('guesses-list');
+    list.innerHTML = '';
+    patientsList.forEach(patientName => {
+        const row = document.createElement('div');
+        row.className = 'guess-row';
+        row.innerHTML = `<span>${patientName}</span>`;
+        const select = document.createElement('select');
+        select.dataset.patient = patientName;
+        select.className = 'guess-select';
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '— выберите —';
+        select.appendChild(defaultOption);
+        roundDiagnoses.forEach((diag, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = diag.substring(0, 40) + '…';
+            select.appendChild(opt);
+        });
+        select.addEventListener('change', function() {
+            const idx = parseInt(this.value);
+            if (!isNaN(idx)) {
+                ws.send(JSON.stringify({
+                    type: 'GUESS_UPDATE',
+                    patientName: patientName,
+                    diagnosisIndex: idx
+                }));
+            }
+        });
+        row.appendChild(select);
+        list.appendChild(row);
     });
 }
 
-function toggleGuessed(idx) {
-    if (guessedDiagnoses.has(idx)) {
-        guessedDiagnoses.delete(idx);
-    } else {
-        guessedDiagnoses.add(idx);
-    }
-    const el = document.getElementById(`diag-${idx}`);
-    el.classList.toggle('guessed');
-    document.getElementById('guessed-count').textContent = `${guessedDiagnoses.size} / 10`;
-}
-
-function incrementQuestion() {
-    questionCount++;
-    document.getElementById('q-count').textContent = questionCount;
-    const subs = [
-        'Нажмите кнопку после каждого вопроса',
-        'Хороший вопрос!',
-        'Так держать!',
-        'Давите на пациента 😈',
-        'Ещё немного...',
-        'Вы настоящий доктор!',
-        'Пациент нервничает 👀',
-        'Диагноз близко!',
-        'Отличная работа!',
-        'Ещё один вопрос!',
-    ];
-    document.getElementById('q-sub').textContent = subs[Math.min(questionCount, subs.length-1)];
-    ws.send(JSON.stringify({ type: 'QUESTION_ASKED', count: questionCount }));
-}
-
-function endGame() {
-    ws.send(JSON.stringify({ type: 'END_GAME' }));
-}
-
-// Room code input auto-uppercase
+// auto uppercase room code
 document.getElementById('room-code')?.addEventListener('input', function() {
     this.value = this.value.toUpperCase();
 });
