@@ -869,9 +869,11 @@ let guessedDiagnoses = new Set();
 let timerInterval = null;
 let sessionSeconds = 0;
 
-const SERVER_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'ws://localhost:3000'
-    : `wss://${window.location.hostname.replace('--', '-')}.amvera.io`;
+const SERVER_URL =
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1'
+        ? 'ws://localhost:3000'
+        : 'wss://the-diagnosis-fidelity.amvera.io';
 
 // ─── UTILS ────────────────────────────────────────────
 function showScreen(id) {
