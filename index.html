@@ -936,6 +936,7 @@ function connectWebSocket(callback) {
 
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
+        console.log(data);
 
         if (data.type === 'ROOM_CREATED' || data.type === 'ROOM_JOINED') {
             document.getElementById('display-room-code').textContent = data.code;
